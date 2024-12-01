@@ -6,7 +6,7 @@
 #    By: ego <ego@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/15 12:42:34 by hcavet            #+#    #+#              #
-#    Updated: 2024/11/15 14:15:27 by ego              ###   ########.fr        #
+#    Updated: 2024/12/01 06:34:42 by ego              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ SRC		=	push_swap.c			\
 			swap.c				\
 			rotate.c			\
 			reverse_rotate.c	\
-			display.c
+			display.c			\
+			stack.c				\
+			check.c
 SRCS	=	$(addprefix $(SDIR), $(SRC))
 OBJS	=	$(SRCS:.c=.o)
 

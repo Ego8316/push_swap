@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display.c                                          :+:      :+:    :+:   */
+/*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/15 14:12:52 by ego               #+#    #+#             */
-/*   Updated: 2024/12/01 06:30:24 by ego              ###   ########.fr       */
+/*   Created: 2024/11/18 21:29:49 by ego               #+#    #+#             */
+/*   Updated: 2024/12/01 06:16:34 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_putstr(char *s)
+t_stack	*stack_new(int value)
 {
-	int	len;
+	t_stack	*node;
 
-	len = 0;
-	while (s[len])
-		len++;
-	write(1, s, len);
-	return ;
+	node = (t_stack *)malloc(sizeof(t_stack));
+	if (!node)
+		return (NULL);
+	node->value = value;
+	node->next = NULL;
+	return (node);
 }
+
+// void	stack_add_front(t_stack **stack, int value)
+// {
+// 	return ;
+// }
+
+// void	stack_add_back(int value)
+// {
+// 	return ;
+// }
