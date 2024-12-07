@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:09:34 by ego               #+#    #+#             */
-/*   Updated: 2024/12/07 19:42:28 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/07 19:51:58 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	rrb(t_stack **stack_b, int display)
 }
 
 /*	rrr
-*	The last elements of stacks a and b become the first ones.
+*	rra and rrb at the same time.
 */
 void	rrr(t_stack **stack_a, t_stack **stack_b, int display)
 {
