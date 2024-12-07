@@ -6,12 +6,16 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 21:29:49 by ego               #+#    #+#             */
-/*   Updated: 2024/12/07 18:31:36 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/07 19:30:56 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/*	stack_new
+*	Creates a new stack node.
+*	Return: NULL if allocation failed, the new node otherwise.
+*/
 t_stack	*stack_new(int value)
 {
 	t_stack	*node;
@@ -24,7 +28,10 @@ t_stack	*stack_new(int value)
 	return (node);
 }
 
-void	stack_clear(t_stack **stack)
+/*	stack_free
+*	Frees the whole stack.
+*/
+void	stack_free(t_stack **stack)
 {
 	t_stack	*s;
 	t_stack	*temp;
@@ -44,6 +51,10 @@ void	stack_clear(t_stack **stack)
 	return ;
 }
 
+/*	stack_fill
+*	Creates a stack and fills it with the arguments.
+*	Return: the filled stack, exits the program if allocation failed.
+*/
 t_stack	*stack_fill(char **argv)
 {
 	t_stack	*stack;
@@ -67,6 +78,10 @@ t_stack	*stack_fill(char **argv)
 	return (stack);
 }
 
+/*	stack_issorted
+*	Checks if a stack is sorted.
+*	Return: 1 if it is sorted, 0 otherwise.
+*/
 int	stack_issorted(t_stack *stack)
 {
 	if (!stack)

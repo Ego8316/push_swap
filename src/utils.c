@@ -6,23 +6,26 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 17:31:11 by ego               #+#    #+#             */
-/*   Updated: 2024/12/07 18:39:30 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/07 19:20:05 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/*	exit_error
+*	Exits the program after freeing the stacks.
+*/
 void	exit_error(t_stack **stack_a, t_stack **stack_b)
 {
-	stack_clear(stack_a);
-	stack_clear(stack_b);
+	stack_free(stack_a);
+	stack_free(stack_b);
 	ft_putstr_error(ERROR);
 	exit(1);
 }
 
 /*	ft_strcmp
-*   Checks if the two given strings are identical.
-*   Return: 1 if the strings differ, 0 if not.
+*	Checks if the two given strings are identical.
+*	Return: 1 if the strings differ, 0 otherwise.
 */
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -41,14 +44,18 @@ int	ft_strcmp(char *s1, char *s2)
 }
 
 /*	ft_isdigit
-*   Checks if the given character is a digit.
-*   Return: 1 if the character is a digit, 0 if not.
+*	Checks if the given character is a digit.
+*	Return: 1 if the character is a digit, 0 otherwise.
 */
 int	ft_isdigit(char c)
 {
 	return (c >= '0' && c <= '9');
 }
 
+/*	ft_atoi
+*	Convers a string to an integer.
+*	Return: the converted integer.
+*/
 int	ft_atoi(char *nptr)
 {
 	int	nb;

@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:58:57 by ego               #+#    #+#             */
-/*   Updated: 2024/12/07 18:47:50 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/07 19:41:43 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,21 @@ typedef struct s_stack
 // Stack utilities
 t_stack	*stack_new(int value);
 t_stack	*stack_fill(char **argv);
-void	stack_clear(t_stack **stack);
+void	stack_free(t_stack **stack);
 int		stack_issorted(t_stack *stack);
 
 // Operations
+void	sa(t_stack **stack_a, int display);
+void	sb(t_stack **stack_b, int display);
+void	ss(t_stack **stack_a, t_stack **stack_b, int display);
+void	pa(t_stack **stack_a, t_stack **stack_b, int display);
+void	pb(t_stack **stack_a, t_stack **stack_b, int display);
+void	ra(t_stack **stack_a, int display);
+void	rb(t_stack **stack_b, int display);
+void	rr(t_stack **stack_a, t_stack **stack_b, int display);
+void	rra(t_stack **stack_a, int display);
+void	rrb(t_stack **stack_b, int display);
+void	rrr(t_stack **stack_a, t_stack **stack_b, int display);
 
 // Display utilities
 void	ft_putstr(char *str);

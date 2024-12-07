@@ -6,16 +6,15 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 05:58:08 by ego               #+#    #+#             */
-/*   Updated: 2024/12/07 18:44:15 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/07 19:19:19 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /*	ft_isint
-*   Checks if the given string corresponds to an integer.
-*   Return: 1 if the string corresponds to an int, 0 if not,
-*	2 if the string corresponds to a zero.
+*	Checks if the given string corresponds to an integer.
+*	Return: 1 if the string is an int, 2 if it is a zero, 0 otherwise.
 */
 static int	ft_isint(char *s)
 {
@@ -45,9 +44,8 @@ static int	ft_isint(char *s)
 }
 
 /*	have_duplicates
-*   Checks if there are duplicates inside the input.
-*   Return: 1 if there are duplicates, taking into account
-*	the case n, +n; 0 if not.
+*	Checks if there are duplicates inside the input.
+*	Return: 1 if there are duplicates, 0 otherwise.
 */
 static int	have_duplicates(char **argv)
 {
@@ -74,8 +72,8 @@ static int	have_duplicates(char **argv)
 }
 
 /*	check_argument
-*   Checks if the given argument if correct.
-*   Return: 1 if the argument is correct, 0 if not.
+*	Checks if the given argument is correct.
+*	Return: 1 if the argument is correct, 0 otherwise.
 */
 int	check_argument(char **argv)
 {
