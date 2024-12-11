@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:58:57 by ego               #+#    #+#             */
-/*   Updated: 2024/12/11 01:19:35 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/11 02:27:12 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,13 @@ void	rra(t_stack **stack_a, int display);
 void	rrb(t_stack **stack_b, int display);
 void	rrr(t_stack **stack_a, t_stack **stack_b, int display);
 
-// Sort functions
+// Sorting functions
 void	sort_three(t_stack **stack);
+void	sort_four(t_stack **stack_a, t_stack **stack_b);
+void	sort_five(t_stack **stack_a, t_stack **stack_b);
+
+// Sorting utilities
+int		get_min_index(t_stack *stack);
 
 // Display utilities
 void	ft_putstr(char *str);

@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:21:53 by ego               #+#    #+#             */
-/*   Updated: 2024/12/11 01:20:01 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/11 02:27:36 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,21 @@ int	main(int argc, char **argv)
 		exit_error(0, 0);
 	stack_a = stack_fill(argv);
 	stack_b = NULL;
-	stack_print(stack_a, stack_b);
+	// stack_print(stack_a, stack_b);
 	if (!stack_issorted(stack_a))
 	{
 		if (argc < 4)
 			sa(&stack_a, 1);
 		else if (argc < 5)
 			sort_three(&stack_a);
+		else if (argc < 6)
+			sort_four(&stack_a, &stack_b);
+		else if (argc < 7)
+			sort_five(&stack_a, &stack_b);
+		// else
+		// 	sort(&stack_a, &stack_b);
 	}
-	printf("-------------\n");
+	// printf("-------------\n");
 	stack_print(stack_a, stack_b);
 	stack_free(&stack_a);
 	stack_free(&stack_b);
