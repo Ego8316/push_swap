@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 17:31:11 by ego               #+#    #+#             */
-/*   Updated: 2024/12/07 19:20:05 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/07 20:13:39 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,6 @@ int	ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-/*	ft_isdigit
-*	Checks if the given character is a digit.
-*	Return: 1 if the character is a digit, 0 otherwise.
-*/
-int	ft_isdigit(char c)
-{
-	return (c >= '0' && c <= '9');
-}
-
 /*	ft_atoi
 *	Convers a string to an integer.
 *	Return: the converted integer.
@@ -72,7 +63,7 @@ int	ft_atoi(char *nptr)
 		sign = 44 - nptr[i];
 		i++;
 	}
-	while (ft_isdigit(nptr[i]))
+	while (nptr[i])
 	{
 		nb = nb * 10 + (nptr[i] - '0');
 		i++;

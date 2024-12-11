@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:58:57 by ego               #+#    #+#             */
-/*   Updated: 2024/12/07 19:41:43 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/11 01:19:35 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 typedef struct s_stack
 {
 	int				value;
+	int				rank;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -45,6 +46,9 @@ void	rra(t_stack **stack_a, int display);
 void	rrb(t_stack **stack_b, int display);
 void	rrr(t_stack **stack_a, t_stack **stack_b, int display);
 
+// Sort functions
+void	sort_three(t_stack **stack);
+
 // Display utilities
 void	ft_putstr(char *str);
 void	ft_putstr_error(char *s);
@@ -56,7 +60,6 @@ int		check_argument(char **argv);
 // Utilities
 void	exit_error(t_stack **stack_a, t_stack **stack_b);
 int		ft_strcmp(char *s1, char *s2);
-int		ft_isdigit(char c);
 int		ft_atoi(char *nptr);
 
 #endif

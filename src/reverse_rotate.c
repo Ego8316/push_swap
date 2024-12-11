@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:09:34 by ego               #+#    #+#             */
-/*   Updated: 2024/12/07 19:51:58 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/11 01:16:55 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 */
 static void	reverse_rotate(t_stack **stack)
 {
-	t_stack *before_tail;
-	t_stack *tail;
+	t_stack	*before_tail;
+	t_stack	*tail;
 
 	if (!(*stack) || !((*stack)->next))
 		return ;

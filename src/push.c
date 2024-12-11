@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:10:25 by ego               #+#    #+#             */
-/*   Updated: 2024/12/07 19:16:10 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/11 01:17:39 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 static void	push(t_stack **src, t_stack **dest)
 {
 	t_stack	*temp;
-	
+
 	if (!(*src))
 		return ;
 	temp = (*src)->next;

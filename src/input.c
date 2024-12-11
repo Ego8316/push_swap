@@ -6,11 +6,20 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 05:58:08 by ego               #+#    #+#             */
-/*   Updated: 2024/12/07 19:19:19 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/11 01:16:30 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+/*	ft_isdigit
+*	Checks if the given character is a digit.
+*	Return: 1 if the character is a digit, 0 otherwise.
+*/
+static int	ft_isdigit(char c)
+{
+	return (c >= '0' && c <= '9');
+}
 
 /*	ft_isint
 *	Checks if the given string corresponds to an integer.
@@ -52,7 +61,7 @@ static int	have_duplicates(char **argv)
 	int	i;
 	int	j;
 	int	shift_i;
-	int shift_j;
+	int	shift_j;
 
 	i = 1;
 	while (argv[i])

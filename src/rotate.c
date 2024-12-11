@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:09:48 by ego               #+#    #+#             */
-/*   Updated: 2024/12/07 19:52:10 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/11 01:17:05 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 */
 static void	rotate(t_stack **stack)
 {
-	t_stack *temp;
-	t_stack *tail;
+	t_stack	*temp;
+	t_stack	*tail;
 
 	if (!(*stack) || !((*stack)->next))
 		return ;
