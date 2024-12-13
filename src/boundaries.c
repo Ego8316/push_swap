@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 04:14:22 by ego               #+#    #+#             */
-/*   Updated: 2024/12/13 04:23:35 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/13 17:00:05 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_boundaries(t_bounds *bounds, int size)
 	bounds->lower = 0;
 	bounds->upper = size / CHUNK;
 	bounds->size = size;
+	return ;
 }
 
 /*	update_boundaries
@@ -29,4 +30,7 @@ void	update_boundaries(t_bounds *bounds)
 {
 	bounds->lower = bounds->upper;
 	bounds->upper = bounds->upper + (bounds->size - bounds->upper) / CHUNK;
+	if (bounds->upper == bounds->lower)
+		bounds->upper = bounds->lower + 1;
+	return ;
 }

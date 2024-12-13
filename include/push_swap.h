@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:58:57 by ego               #+#    #+#             */
-/*   Updated: 2024/12/13 04:38:55 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/13 15:51:07 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <limits.h>
 
 # define ERROR "\033[31mError\033[0m\n"
-# define CHUNK 20
+# define CHUNK 3
 
 typedef struct s_stack
 {

@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:04:19 by ego               #+#    #+#             */
-/*   Updated: 2024/12/11 01:17:24 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/13 16:16:11 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ static void	swap(t_stack *stack)
 	temp = stack->value;
 	stack->value = stack->next->value;
 	stack->next->value = temp;
+	temp = stack->rank;
+	stack->rank = stack->next->rank;
+	stack->next->rank = temp;
 	return ;
 }
 

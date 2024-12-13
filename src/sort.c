@@ -6,18 +6,18 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 01:09:26 by ego               #+#    #+#             */
-/*   Updated: 2024/12/13 04:39:23 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/13 16:58:57 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_ranks(t_stack *stack)
+void	print_ranks(t_stack *s)
 {
-	while (stack)
+	while (s)
 	{
-		printf("%i\n", stack->rank);
-		stack = stack->next;
+		printf("%i\t:\t%i\n", s->rank, s->value);
+		s = s->next;
 	}
 	return ;
 }
@@ -26,7 +26,6 @@ void	print_ranks(t_stack *stack)
 *	Pushes everything from stack a to stack b except three. 
 *	The push is made by smaller chunks rankwise.
 *	Occasionally swaps values to sort by pairs in descending order.
-*	Sorts stack a afterwards with sort_three.
 *	Cost: at most 4n moves.
 */
 static void	push_all(t_stack **a, t_stack **b)
@@ -55,19 +54,38 @@ static void	push_all(t_stack **a, t_stack **b)
 		}
 		update_boundaries(&bounds);
 	}
-	small_sort(a, b, 3);
+	return ;
 }
 
 static void	push_back(t_stack **a, t_stack **b)
 {
+	int	rank;
+
+	rank = (*b)->rank;
 	while (*b)
-		pa(a, b, 1);
+	{
+		if ((*b)->rank == rank)
+		{
+			pa(a, b, 1);
+			rank--;
+		}
+		else
+			rb(b, 1);
+	}
+	return ;
 }
 
+/*	sort
+*	Sorts the stack a.
+*	First pushes everything to b my smaller and smaller chunks.
+*	Sorts the three elements left in a with small_sort.
+*	Pushes back everything to a in right order with minimal moves.
+*/
 void	sort(t_stack **stack_a, t_stack **stack_b)
 {
 	compute_ranks(stack_a);
 	push_all(stack_a, stack_b);
+	small_sort(stack_a, stack_b, 3);
 	push_back(stack_a, stack_b);
 	return ;
 }
