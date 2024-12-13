@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 21:29:49 by ego               #+#    #+#             */
-/*   Updated: 2024/12/07 19:30:56 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/13 01:39:24 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,21 @@ int	stack_issorted(t_stack *stack)
 		stack = stack->next;
 	}
 	return (1);
+}
+
+/*	stack_size
+*	Computes the size of a stack.
+*	Return: said size.
+*/
+int	stack_size(t_stack *stack)
+{
+	int	size;
+
+	size = 0;
+	while (stack)
+	{
+		size++;
+		stack = stack->next;
+	}
+	return (size);
 }

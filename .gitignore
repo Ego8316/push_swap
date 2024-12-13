@@ -1,2 +1,5 @@
 src/*.o
 .vscode
+push_swap_visualizer
+checker_linux
+tester.py
