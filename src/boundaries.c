@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 04:14:22 by ego               #+#    #+#             */
-/*   Updated: 2024/12/13 17:00:05 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/15 02:58:55 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 /*	init_boundaries
 *	Initializes the boundaries for the first chunk.
 */
-void	init_boundaries(t_bounds *bounds, int size)
+void	init_boundaries(t_bounds *bounds, int size, int chunk)
 {
 	bounds->lower = 0;
-	bounds->upper = size / CHUNK;
+	bounds->upper = size / chunk;
 	bounds->size = size;
 	return ;
 }
@@ -26,10 +26,10 @@ void	init_boundaries(t_bounds *bounds, int size)
 /*	update_boundaries
 *	Updates boundaries to those of the next chunk.
 */
-void	update_boundaries(t_bounds *bounds)
+void	update_boundaries(t_bounds *bounds, int chunk)
 {
 	bounds->lower = bounds->upper;
-	bounds->upper = bounds->upper + (bounds->size - bounds->upper) / CHUNK;
+	bounds->upper = bounds->upper + (bounds->size - bounds->upper) / chunk;
 	if (bounds->upper == bounds->lower)
 		bounds->upper = bounds->lower + 1;
 	return ;

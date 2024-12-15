@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 01:09:26 by ego               #+#    #+#             */
-/*   Updated: 2024/12/13 16:58:57 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/15 02:58:38 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	print_ranks(t_stack *s)
 *	Occasionally swaps values to sort by pairs in descending order.
 *	Cost: at most 4n moves.
 */
-static void	push_all(t_stack **a, t_stack **b)
+static void	push_all(t_stack **a, t_stack **b, int chunk)
 {
 	int			remaining;
 	int			pushed;
 	t_bounds	bounds;
 
-	init_boundaries(&bounds, stack_size(*a));
+	init_boundaries(&bounds, stack_size(*a), chunk);
 	remaining = bounds.size;
 	while (remaining > 3)
 	{
@@ -52,25 +52,56 @@ static void	push_all(t_stack **a, t_stack **b)
 			else
 				ra(a, 1);
 		}
-		update_boundaries(&bounds);
+		update_boundaries(&bounds, chunk);
 	}
 	return ;
+}
+
+int	get_rank_index(t_stack *s, int rank)
+{
+	int	index;
+
+	index = 0;
+	while (s)
+	{
+		if (s->rank == rank)
+			return (index);
+		index++;
+		s = s->next;
+	}
+	return (-1);
 }
 
 static void	push_back(t_stack **a, t_stack **b)
 {
 	int	rank;
+	int	size;
+	int	index;
 
 	rank = (*b)->rank;
+	size = stack_size(*b);
 	while (*b)
 	{
 		if ((*b)->rank == rank)
 		{
 			pa(a, b, 1);
 			rank--;
+			size--;
 		}
 		else
-			rb(b, 1);
+		{
+			index = get_rank_index(*b, rank);
+			if (index < size / 2)
+			{
+				while ((*b)->rank != rank)
+					rb(b, 1);
+			}
+			else
+			{
+				while ((*b)->rank != rank)
+					rrb(b, 1);
+			}
+		}
 	}
 	return ;
 }
@@ -81,10 +112,10 @@ static void	push_back(t_stack **a, t_stack **b)
 *	Sorts the three elements left in a with small_sort.
 *	Pushes back everything to a in right order with minimal moves.
 */
-void	sort(t_stack **stack_a, t_stack **stack_b)
+void	sort(t_stack **stack_a, t_stack **stack_b, int chunk)
 {
 	compute_ranks(stack_a);
-	push_all(stack_a, stack_b);
+	push_all(stack_a, stack_b, chunk);
 	small_sort(stack_a, stack_b, 3);
 	push_back(stack_a, stack_b);
 	return ;

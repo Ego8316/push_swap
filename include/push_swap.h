@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:58:57 by ego               #+#    #+#             */
-/*   Updated: 2024/12/13 15:51:07 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/15 02:57:58 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <limits.h>
 
 # define ERROR "\033[31mError\033[0m\n"
-# define CHUNK 3
 
 typedef struct s_stack
 {
@@ -57,13 +56,13 @@ void	rrr(t_stack **stack_a, t_stack **stack_b, int display);
 
 // Sorting functions
 void	small_sort(t_stack **stack_a, t_stack **stack_b, int size);
-void	sort(t_stack **stack_a, t_stack **stack_b);
+void	sort(t_stack **stack_a, t_stack **stack_b, int chunk);
 
 // Sorting utilities
 void	compute_ranks(t_stack **stack);
 int		get_min_index(t_stack *stack);
-void	init_boundaries(t_bounds *bounds, int size);
-void	update_boundaries(t_bounds *bounds);
+void	init_boundaries(t_bounds *bounds, int size, int chunk);
+void	update_boundaries(t_bounds *bounds, int chunk);
 
 // Display utilities
 void	ft_putstr(char *str);
