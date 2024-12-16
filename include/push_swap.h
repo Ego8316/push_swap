@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:58:57 by ego               #+#    #+#             */
-/*   Updated: 2024/12/15 18:45:54 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/16 21:53:27 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <limits.h>
 
 # define ERROR "\033[31mError\033[0m\n"
+# define CHUNK 2
 
 typedef struct s_stack
 {
@@ -58,7 +59,7 @@ void	rrr(t_stack **stack_a, t_stack **stack_b, int display);
 
 // Sorting functions
 void	small_sort(t_stack **stack_a, t_stack **stack_b, int size);
-void	sort(t_stack **stack_a, t_stack **stack_b, int chunk);
+void	sort(t_stack **stack_a, t_stack **stack_b);
 
 // Sorting utilities
 void	compute_ranks(t_stack **stack);
@@ -67,16 +68,14 @@ int		get_chunk_rank(t_stack *stack, t_bounds bounds);
 int		get_rank_index(t_stack *stack, int rank);
 int		get_target_index(t_stack *stack, int rank);
 void	shift_stack(t_stack **stack, int rank, char s);
-void	init_boundaries(t_bounds *bounds, int size, int chunk);
-void	update_boundaries(t_bounds *bounds, int chunk);
+void	init_boundaries(t_bounds *bounds, int size);
+void	update_boundaries(t_bounds *bounds);
 void	calculate_costs(t_stack *a, t_stack *b);
 void	move_least_cost_item(t_stack **a, t_stack **b);
-void	double_shift(t_stack **a, t_stack **b, int cost_a, int cost_b);
 
 // Display utilities
 void	ft_putstr(char *str);
 void	ft_putstr_error(char *str);
-void	stack_print(t_stack *stack_a, t_stack *stack_b);
 
 // Argument checking
 int		check_argument(char **argv);
@@ -86,5 +85,7 @@ void	exit_error(t_stack **stack_a, t_stack **stack_b);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_atoi(char *nptr);
 int		ft_abs(int n);
+int		ft_min(int x, int y);
+int		ft_max(int x, int y);
 
 #endif

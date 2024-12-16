@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 18:05:19 by ego               #+#    #+#             */
-/*   Updated: 2024/12/16 05:28:45 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/16 23:40:22 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,32 +40,24 @@ void	calculate_costs(t_stack *a, t_stack *b)
 	return ;
 }
 
-/*	move_least_cost_item
-*	Finds the least-cost item to bring to the top of stack b.
+/*	get_effective_cost
+*	Computes the effective cost for moving an item from b to a.
+*	Example: cost_a = -3 and cost_b = -5, the cost is actually 5 and
+*	not 8 since three of the rotations can be performed on both stacks.
+*	Return: effective cost.
 */
-void	move_least_cost_item(t_stack **a, t_stack **b)
+static int	get_effective_cost(int cost_a, int cost_b)
 {
-	t_stack		*s;
-	int			min_cost;
-	int			cost_a;
-	int			cost_b;
-
-	s = *b;
-	min_cost = INT_MAX;
-	while (s)
-	{
-		if (ft_abs(s->cost_a) + ft_abs(s->cost_b) < min_cost)
-		{
-			cost_a = s->cost_a;
-			cost_b = s->cost_b;
-			min_cost = ft_abs(cost_a) + ft_abs(cost_b);
-		}
-		s = s->next;
-	}
-	double_shift(a, b, cost_a, cost_b);
+	if (cost_a * cost_b > 0)
+		return (ft_max(ft_abs(cost_a), ft_abs(cost_b)));
+	else
+		return (ft_abs(cost_a) + ft_abs(cost_b));
 }
 
-void	double_shift(t_stack **a, t_stack **b, int cost_a, int cost_b)
+/*	double_shift
+*	Shifts both stacks using double rotations when possible.
+*/
+static void	double_shift(t_stack **a, t_stack **b, int cost_a, int cost_b)
 {
 	while (cost_a < 0 && cost_b < 0)
 	{
@@ -87,4 +79,31 @@ void	double_shift(t_stack **a, t_stack **b, int cost_a, int cost_b)
 		rrb(b, 1);
 	while (--cost_b >= 1)
 		rb(b, 1);
+}
+
+/*	move_least_cost_item
+*	Finds the least-cost item to bring to the top of stack b.
+*/
+void	move_least_cost_item(t_stack **a, t_stack **b)
+{
+	t_stack		*s;
+	int			min_cost;
+	int			effective_cost;
+	int			cost_a;
+	int			cost_b;
+
+	s = *b;
+	min_cost = INT_MAX;
+	while (s)
+	{
+		effective_cost = get_effective_cost(s->cost_a, s->cost_b);
+		if (effective_cost < min_cost)
+		{
+			cost_a = s->cost_a;
+			cost_b = s->cost_b;
+			min_cost = effective_cost;
+		}
+		s = s->next;
+	}
+	double_shift(a, b, cost_a, cost_b);
 }

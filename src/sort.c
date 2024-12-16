@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 01:09:26 by ego               #+#    #+#             */
-/*   Updated: 2024/12/16 05:28:04 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/16 16:01:16 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 /*	push_all
 *	Pushes everything from stack a to stack b except three. 
 *	The push is made by smaller chunks rankwise.
-*	Cost: at most 4n moves.
 */
-static void	push_all(t_stack **a, t_stack **b, int chunk)
+static void	push_all(t_stack **a, t_stack **b)
 {
 	int			remaining;
 	int			pushed;
 	t_bounds	bounds;
 
-	init_boundaries(&bounds, stack_size(*a), chunk);
+	init_boundaries(&bounds, stack_size(*a));
 	remaining = bounds.size;
 	while (remaining > 3)
 	{
@@ -39,7 +38,7 @@ static void	push_all(t_stack **a, t_stack **b, int chunk)
 			else
 				ra(a, 1);
 		}
-		update_boundaries(&bounds, chunk);
+		update_boundaries(&bounds);
 	}
 	return ;
 }
@@ -49,7 +48,6 @@ static void	push_all(t_stack **a, t_stack **b, int chunk)
 *	Computes the cost of moving for each item of stack b.
 *	Moves the least-cost item with minimum rotations.
 *	Pushes said item and repeat operation until stack b is empty.
-*	Cost: at most 3n moves.
 */
 static void	push_back(t_stack **a, t_stack **b)
 {
@@ -71,10 +69,10 @@ static void	push_back(t_stack **a, t_stack **b)
 *	Sorts the three elements left in a with small_sort.
 *	Pushes back everything to a in right order with minimal moves.
 */
-void	sort(t_stack **stack_a, t_stack **stack_b, int chunk)
+void	sort(t_stack **stack_a, t_stack **stack_b)
 {
 	compute_ranks(stack_a);
-	push_all(stack_a, stack_b, chunk);
+	push_all(stack_a, stack_b);
 	small_sort(stack_a, stack_b, 3);
 	push_back(stack_a, stack_b);
 	shift_stack(stack_a, 0, 'a');
