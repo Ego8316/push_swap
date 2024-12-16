@@ -6,26 +6,15 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 01:09:26 by ego               #+#    #+#             */
-/*   Updated: 2024/12/15 02:58:38 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/16 05:28:04 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_ranks(t_stack *s)
-{
-	while (s)
-	{
-		printf("%i\t:\t%i\n", s->rank, s->value);
-		s = s->next;
-	}
-	return ;
-}
-
 /*	push_all
 *	Pushes everything from stack a to stack b except three. 
 *	The push is made by smaller chunks rankwise.
-*	Occasionally swaps values to sort by pairs in descending order.
 *	Cost: at most 4n moves.
 */
 static void	push_all(t_stack **a, t_stack **b, int chunk)
@@ -44,8 +33,6 @@ static void	push_all(t_stack **a, t_stack **b, int chunk)
 			if ((*a)->rank >= bounds.lower && (*a)->rank < bounds.upper)
 			{
 				pb(a, b, 1);
-				if ((*b)->next && (*b)->rank < (*b)->next->rank)
-					sb(b, 1);
 				pushed++;
 				remaining--;
 			}
@@ -57,51 +44,23 @@ static void	push_all(t_stack **a, t_stack **b, int chunk)
 	return ;
 }
 
-int	get_rank_index(t_stack *s, int rank)
-{
-	int	index;
-
-	index = 0;
-	while (s)
-	{
-		if (s->rank == rank)
-			return (index);
-		index++;
-		s = s->next;
-	}
-	return (-1);
-}
-
+/*	push_back
+*	Pushes back everything from stack b to stack a.
+*	Computes the cost of moving for each item of stack b.
+*	Moves the least-cost item with minimum rotations.
+*	Pushes said item and repeat operation until stack b is empty.
+*	Cost: at most 3n moves.
+*/
 static void	push_back(t_stack **a, t_stack **b)
 {
-	int	rank;
-	int	size;
-	int	index;
-
-	rank = (*b)->rank;
-	size = stack_size(*b);
 	while (*b)
 	{
-		if ((*b)->rank == rank)
+		if ((*b)->rank != (*a)->rank - 1)
 		{
-			pa(a, b, 1);
-			rank--;
-			size--;
+			calculate_costs(*a, *b);
+			move_least_cost_item(a, b);
 		}
-		else
-		{
-			index = get_rank_index(*b, rank);
-			if (index < size / 2)
-			{
-				while ((*b)->rank != rank)
-					rb(b, 1);
-			}
-			else
-			{
-				while ((*b)->rank != rank)
-					rrb(b, 1);
-			}
-		}
+		pa(a, b, 1);
 	}
 	return ;
 }
@@ -118,5 +77,6 @@ void	sort(t_stack **stack_a, t_stack **stack_b, int chunk)
 	push_all(stack_a, stack_b, chunk);
 	small_sort(stack_a, stack_b, 3);
 	push_back(stack_a, stack_b);
+	shift_stack(stack_a, 0, 'a');
 	return ;
 }

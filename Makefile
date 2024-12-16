@@ -6,7 +6,7 @@
 #    By: ego <ego@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/15 12:42:34 by hcavet            #+#    #+#              #
-#    Updated: 2024/12/13 04:24:32 by ego              ###   ########.fr        #
+#    Updated: 2024/12/16 05:26:40 by ego              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC		=	push_swap.c			\
 			utils.c				\
 			small_sort.c		\
 			sort.c				\
+			cost.c				\
 			sort_utils.c		\
 			boundaries.c		\
 			input.c

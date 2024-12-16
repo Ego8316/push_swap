@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 17:31:11 by ego               #+#    #+#             */
-/*   Updated: 2024/12/07 20:13:39 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/15 18:15:39 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,18 @@ int	ft_atoi(char *nptr)
 		i++;
 	}
 	return (nb * sign);
+}
+
+/*	ft_abs
+*	Computes the absolut value of given integer.
+*	If the given integer is INT_MIN, returns INT_MAX.
+*	Return: absolute value.
+*/
+int	ft_abs(int n)
+{
+	if (n == INT_MIN)
+		return (INT_MAX);
+	if (n < 0)
+		n *= -1;
+	return (n);
 }

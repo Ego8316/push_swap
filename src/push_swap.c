@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:21:53 by ego               #+#    #+#             */
-/*   Updated: 2024/12/15 03:11:11 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/16 05:28:29 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,10 @@ int	main(int argc, char **argv)
 		else if (argc < 7)
 			small_sort(&stack_a, &stack_b, argc - 1);
 		else if (argc < 200)
-			sort(&stack_a, &stack_b, 3);
+			sort(&stack_a, &stack_b, 2);
 		else
-			sort(&stack_a, &stack_b, 6);
+			sort(&stack_a, &stack_b, 2);
 	}
-	if (stack_issorted(stack_a))
-		printf("OK\n");
-	else
-		printf("KO\n");
 	stack_free(&stack_a);
 	stack_free(&stack_b);
 	return (0);
