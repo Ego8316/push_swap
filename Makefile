@@ -6,7 +6,7 @@
 #    By: ego <ego@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/15 12:42:34 by hcavet            #+#    #+#              #
-#    Updated: 2024/12/19 03:05:04 by ego              ###   ########.fr        #
+#    Updated: 2024/12/19 04:20:07 by ego              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,80 +82,57 @@ fclean	:	clean
 			echo "$(ORANGE)[OK] All binary files have been removed.$(RESET)"
 
 VGRIND	=	valgrind
-LOG		=	log
 VFLAGS	=	--leak-check=full
+TEST	=	make --no-print-directory test
+LOG		=	log
+MIN		=	-1000
+MAX		=	1000
+N		=	5
 
-test	:	2 3 5 100 500
-
-2		:
-			echo "$(ORANGE)Testing for n = 2$(RESET)"
-			echo "N = 2 TEST" >> $(LOG)
-			$(eval ARG = $(shell shuf -i 0-100 -n 2))
-			echo "Initial stack:\t$(ARG)"
+test	:
+			echo "$(ORANGE)Testing for n = $(N)$(RESET)"
+			echo "N = $(N) TEST" >> $(LOG)
+			$(eval ARG = $(shell seq $(MIN) $(MAX) | shuf -n $(N)))
+			if [ "$(N)" -le 10 ]; then echo "Initial stack:\t$(ARG)"; fi
 			echo -n "Checker:\t"
-			./push_swap $(ARG) | ./checker_linux $(ARG)
+			$(eval CHECK = $(shell ./push_swap $(ARG) | ./checker_linux $(ARG)))
+			if [ "$(CHECK)" = "OK" ]; then echo -n "$(GREEN)"; else echo -n "$(RED)"; fi
+			echo "$(CHECK)$(RESET)"
 			echo -n "Moves:\t\t"
 			./push_swap $(ARG) | wc -l
 			$(VGRIND) $(VFLAGS) ./$(NAME) $(ARG) >> $(LOG) 2>&1
 			echo "" >> $(LOG)
-			echo "$(BLUE)Moves and leak check stored in $(LOG) file.$(BLUE)\n"
+			echo "$(BLUE)Moves and leak check stored in $(LOG) file.$(RESET)"
+			if [ $(N) -le 499 ]; then echo ""; fi
 
+tests	:	all
+			echo "Iniating testing..."
+			$(TEST) N=2
+			$(TEST) N=3
+			$(TEST) N=5
+			$(TEST)	N=100
+			$(TEST) N=500
+			echo "$(GREEN)[OK] Testing complete!$(RESET)"
 
-3		:
-			echo "$(ORANGE)Testing for n = 3$(RESET)"
-			echo "N = 3 TEST" >> $(LOG)
-			$(eval ARG = $(shell shuf -i 0-100 -n 3))
-			echo "Initial stack:\t$(ARG)"
-			echo -n "Checker:\t"
-			./push_swap $(ARG) | ./checker_linux $(ARG)
-			echo -n "Moves:\t\t"
-			./push_swap $(ARG) | wc -l
-			$(VGRIND) $(VFLAGS) ./$(NAME) $(ARG) >> $(LOG) 2>&1
-			echo "" >> $(LOG)
-			echo "$(BLUE)Moves and leak check stored in $(LOG) file.$(BLUE)\n"
-
-5		:
-			echo "$(ORANGE)Testing for n = 5$(RESET)"
-			echo "N = 5 TEST" >> $(LOG)
-			$(eval ARG = $(shell shuf -i 0-100 -n 5))
-			echo "Initial stack:\t$(ARG)"
-			echo -n "Checker:\t"
-			./push_swap $(ARG) | ./checker_linux $(ARG)
-			echo -n "Moves:\t\t"
-			./push_swap $(ARG) | wc -l
-			$(VGRIND) $(VFLAGS) ./$(NAME) $(ARG) >> $(LOG) 2>&1
-			echo "" >> $(LOG)
-			echo "$(BLUE)Moves and leak check stored in $(LOG) file.$(BLUE)\n"
-
-100		:
-			echo "$(ORANGE)Testing for n = 100$(RESET)"
-			echo "N = 100 TEST" >> $(LOG)
-			$(eval ARG = $(shell shuf -i 0-500 -n 100))
-			echo -n "Checker:\t"
-			./push_swap $(ARG) | ./checker_linux $(ARG)
-			echo -n "Moves:\t\t"
-			./push_swap $(ARG) | wc -l
-			$(VGRIND) $(VFLAGS) ./$(NAME) $(ARG) >> $(LOG) 2>&1
-			echo "" >> $(LOG)
-			echo "$(BLUE)Moves and leak check stored in $(LOG) file.$(BLUE)\n"
-
-
-500		:
-			echo "$(ORANGE)Testing for n = 500$(RESET)"
-			echo "N = 500 TEST" >> $(LOG)
-			$(eval ARG = $(shell shuf -i 0-5000 -n 500))
-			echo -n "Checker:\t"
-			./push_swap $(ARG) | ./checker_linux $(ARG)
-			echo -n "Moves:\t\t"
-			./push_swap $(ARG) | wc -l
-			$(VGRIND) $(VFLAGS) ./$(NAME) $(ARG) >> $(LOG) 2>&1
-			echo "" >> $(LOG)
-			echo "$(BLUE)Moves and leak check stored in $(LOG) file.$(BLUE)\n"
+leaks	:
+			$(eval DEF = $(shell awk '/definitely lost:/ {sum += $$4} END {if(sum) print sum; else print "0"}' $(LOG)))
+			$(eval IND = $(shell awk '/indirectly lost:/ {sum += $$4} END {if(sum) print sum; else print "0"}' $(LOG)))
+			$(eval POS = $(shell awk '/possibly lost:/ {sum += $$4} END {if(sum) print sum; else print "0"}' $(LOG)))
+			$(eval TOT = $(shell awk '/lost:/ {sum += $$4} END {if(sum) print sum; else print "0"}' $(LOG)))
+			$(eval CDEF = $(if $(shell [ $(DEF) -ge 1 ]), $(RED), $(GREEN)))
+			$(eval CIND = $(if $(shell [ $(IND) -ge 1 ]), $(RED), $(GREEN)))
+			$(eval CPOS = $(if $(shell [ $(POS) -ge 1 ]), $(RED), $(GREEN)))
+			$(eval CTOT = $(if $(shell [ $(TOT) -ge 1 ]), $(RED), $(GREEN)))
+			echo "Definitely lost:\t$(CDEF)$(DEF)$(RESET) bytes"
+			echo "Indirectely lost:\t$(CIND)$(IND)$(RESET) bytes"
+			echo "Possibly lost:\t\t$(CPOS)$(POS)$(RESET) bytes"
+			echo "Total:\t\t\t$(CTOT)$(TOT)$(RESET) bytes"
+			if [ $(TOT) -ge 1 ]; then echo "$(RED)[KO] Leaks!$(RESET)"; else echo "$(GREEN)[OK] No leaks!$(RESET)"; fi
 
 re		:	fclean all
 
 .PHONY	:	all clean fclean re
-.SILENT	:	all $(NAME) $(OBJS) $(BOBJS) norm debug clean fclean re header test bonus 2 3 5 100 500
+.SILENT	:	all $(NAME) $(OBJS) $(BOBJS) norm debug clean fclean re header test bonus tests leaks
 
 RED		=	\033[31m
 ORANGE	=	\033[38;5;214m
