@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:46:57 by ego               #+#    #+#             */
-/*   Updated: 2024/12/19 03:07:08 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/19 04:50:02 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define FD_MAX 1024
 # define ERROR "\033[31mError\033[0m\n"
 # define OK "\033[32mOK\033[0m\n"
-# define KO "\033[31mOK\033[0m\n"
+# define KO "\033[31mKO\033[0m\n"
 
 typedef struct s_stack
 {
