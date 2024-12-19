@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 01:09:26 by ego               #+#    #+#             */
-/*   Updated: 2024/12/16 16:01:16 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/17 03:33:31 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 *	Pushes everything from stack a to stack b except three. 
 *	The push is made by smaller chunks rankwise.
 */
-static void	push_all(t_stack **a, t_stack **b)
+static void	push_all(t_stack **a, t_stack **b, int chunk)
 {
 	int			remaining;
 	int			pushed;
 	t_bounds	bounds;
 
-	init_boundaries(&bounds, stack_size(*a));
+	init_boundaries(&bounds, stack_size(*a), chunk);
 	remaining = bounds.size;
 	while (remaining > 3)
 	{
@@ -38,7 +38,7 @@ static void	push_all(t_stack **a, t_stack **b)
 			else
 				ra(a, 1);
 		}
-		update_boundaries(&bounds);
+		update_boundaries(&bounds, chunk);
 	}
 	return ;
 }
@@ -53,11 +53,8 @@ static void	push_back(t_stack **a, t_stack **b)
 {
 	while (*b)
 	{
-		if ((*b)->rank != (*a)->rank - 1)
-		{
-			calculate_costs(*a, *b);
-			move_least_cost_item(a, b);
-		}
+		calculate_costs(*a, *b);
+		move_least_cost_item(a, b);
 		pa(a, b, 1);
 	}
 	return ;
@@ -69,10 +66,10 @@ static void	push_back(t_stack **a, t_stack **b)
 *	Sorts the three elements left in a with small_sort.
 *	Pushes back everything to a in right order with minimal moves.
 */
-void	sort(t_stack **stack_a, t_stack **stack_b)
+void	sort(t_stack **stack_a, t_stack **stack_b, int chunk)
 {
 	compute_ranks(stack_a);
-	push_all(stack_a, stack_b);
+	push_all(stack_a, stack_b, chunk);
 	small_sort(stack_a, stack_b, 3);
 	push_back(stack_a, stack_b);
 	shift_stack(stack_a, 0, 'a');

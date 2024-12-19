@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 05:58:08 by ego               #+#    #+#             */
-/*   Updated: 2024/12/11 01:16:30 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/17 19:19:19 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static int	have_duplicates(char **argv)
 *	Checks if the given argument is correct.
 *	Return: 1 if the argument is correct, 0 otherwise.
 */
-int	check_argument(char **argv)
+int	check_argument(int argc, char **argv)
 {
 	int	i;
 	int	isint;
@@ -92,8 +92,10 @@ int	check_argument(char **argv)
 
 	i = 1;
 	zeros = 0;
-	while (argv[i])
+	while (i < argc)
 	{
+		if (!argv[i][0])
+			return (0);
 		isint = ft_isint(argv[i]);
 		if (isint == 0)
 			return (0);

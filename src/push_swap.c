@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:21:53 by ego               #+#    #+#             */
-/*   Updated: 2024/12/16 15:51:44 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/17 19:18:00 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (0);
-	if (!check_argument(argv))
+	if (!check_argument(argc, argv))
 		exit_error(0, 0);
 	stack_a = stack_fill(argv);
 	stack_b = NULL;
@@ -30,8 +30,10 @@ int	main(int argc, char **argv)
 			sa(&stack_a, 1);
 		else if (argc < 7)
 			small_sort(&stack_a, &stack_b, argc - 1);
+		else if (argc < 200)
+			sort(&stack_a, &stack_b, 2);
 		else
-			sort(&stack_a, &stack_b);
+			sort(&stack_a, &stack_b, 3);
 	}
 	stack_free(&stack_a);
 	stack_free(&stack_b);

@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 18:05:19 by ego               #+#    #+#             */
-/*   Updated: 2024/12/16 23:40:22 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/17 03:16:25 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,37 @@ void	calculate_costs(t_stack *a, t_stack *b)
 	return ;
 }
 
+static int	max_rank(t_stack *b)
+{
+	int	max_rank;
+
+	max_rank = b->rank;
+	while (b)
+	{
+		if (b->rank > max_rank)
+			max_rank = b->rank;
+		b = b->next;
+	}
+	return (max_rank);
+}
+
 /*	get_effective_cost
 *	Computes the effective cost for moving an item from b to a.
 *	Example: cost_a = -3 and cost_b = -5, the cost is actually 5 and
 *	not 8 since three of the rotations can be performed on both stacks.
 *	Return: effective cost.
 */
-static int	get_effective_cost(int cost_a, int cost_b)
+static int	get_effective_cost(t_stack *b, int rank, int cost_a, int cost_b)
 {
+	int	move_penalty;
+	int	rank_penalty;
+
 	if (cost_a * cost_b > 0)
-		return (ft_max(ft_abs(cost_a), ft_abs(cost_b)));
+		move_penalty = ft_max(ft_abs(cost_a), ft_abs(cost_b));
 	else
-		return (ft_abs(cost_a) + ft_abs(cost_b));
+		move_penalty = ft_abs(cost_a) + ft_abs(cost_b);
+	rank_penalty = ft_abs(max_rank(b) - rank);
+	return (MOVE_WEIGHT * move_penalty + RANK_WEIGHT * rank_penalty);
 }
 
 /*	double_shift
@@ -96,7 +115,7 @@ void	move_least_cost_item(t_stack **a, t_stack **b)
 	min_cost = INT_MAX;
 	while (s)
 	{
-		effective_cost = get_effective_cost(s->cost_a, s->cost_b);
+		effective_cost = get_effective_cost(*b, s->rank, s->cost_a, s->cost_b);
 		if (effective_cost < min_cost)
 		{
 			cost_a = s->cost_a;

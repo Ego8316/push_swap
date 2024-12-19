@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 17:31:11 by ego               #+#    #+#             */
-/*   Updated: 2024/12/16 21:53:44 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/17 17:32:43 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,18 +83,6 @@ int	ft_abs(int n)
 	if (n < 0)
 		n *= -1;
 	return (n);
-}
-
-/*	ft_min
-*	Gets the minimum value between two integers.
-*	Return: the minimum value.
-*/
-int	ft_min(int x, int y)
-{
-	if (x < y)
-		return (x);
-	else
-		return (y);
 }
 
 /*	ft_max
