@@ -4,4 +4,5 @@ log
 push_swap
 push_swap_visualizer
 checker_linux
+checker
 tester.py
