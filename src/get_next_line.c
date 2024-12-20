@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 21:50:10 by ego               #+#    #+#             */
-/*   Updated: 2024/12/19 04:50:00 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/19 23:55:43 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	ft_free(char **s)
 	return (1);
 }
 
-static int	ft_get_to_next_nl(int fd, char **stash)
+static int	ft_get_to_next_nl(int fd, char **stash, int *error)
 {
 	char		*buf;
 	char		*temp;
 	ssize_t		r;
 
-	buf = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	buf = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char), error);
 	if (!buf)
 		return (0);
 	r = 1;
@@ -38,7 +38,7 @@ static int	ft_get_to_next_nl(int fd, char **stash)
 		if (r == -1)
 			return (1 - ft_free(&buf));
 		buf[r] = '\0';
-		temp = ft_strjoin(*stash, buf);
+		temp = ft_strjoin(*stash, buf, error);
 		ft_free(stash);
 		*stash = temp;
 		if (!*stash)
@@ -49,13 +49,13 @@ static int	ft_get_to_next_nl(int fd, char **stash)
 	return (ft_free(&buf));
 }
 
-static char	*ft_split_content(char **stash)
+static char	*ft_split_content(char **stash, int *error)
 {
 	char	*temp;
 	char	*line;
 	size_t	i;
 
-	temp = ft_strdup(*stash);
+	temp = ft_strdup(*stash, error);
 	if (!temp)
 		return (NULL);
 	ft_free(stash);
@@ -64,9 +64,9 @@ static char	*ft_split_content(char **stash)
 		i++;
 	if (temp[i] == '\n')
 		i++;
-	line = ft_strndup(temp, i);
+	line = ft_strndup(temp, i, error);
 	if (line)
-		*stash = ft_strdup(temp + i);
+		*stash = ft_strdup(temp + i, error);
 	ft_free(&temp);
 	if (!line || !*stash)
 	{
@@ -77,7 +77,7 @@ static char	*ft_split_content(char **stash)
 	return (line);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int *error)
 {
 	static char	*stash[FD_MAX];
 	char		*line;
@@ -88,13 +88,13 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	line = NULL;
-	if (ft_get_to_next_nl(fd, &stash[fd]) == 0)
+	if (ft_get_to_next_nl(fd, &stash[fd], error) == 0)
 	{
 		ft_free(&stash[fd]);
 		return (NULL);
 	}
 	if (stash[fd] && *stash[fd])
-		line = ft_split_content(&stash[fd]);
+		line = ft_split_content(&stash[fd], error);
 	if (!line || !(*line))
 	{
 		ft_free(&stash[fd]);

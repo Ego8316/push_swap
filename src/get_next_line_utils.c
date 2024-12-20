@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 21:50:37 by ego               #+#    #+#             */
-/*   Updated: 2024/12/19 04:49:57 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/20 00:08:20 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ int	ft_char_in_str(char c, char *s)
 	return (0);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(const char *s, int *error)
 {
 	char	*dup;
 	size_t	i;
 
 	if (!s)
-		return (ft_strdup(""));
+		return (ft_strdup("", error));
 	i = 0;
 	while (s[i])
 		i++;
-	dup = (char *)ft_calloc(i + 1, sizeof(char));
+	dup = (char *)ft_calloc(i + 1, sizeof(char), error);
 	if (!dup)
 		return (NULL);
 	i = 0;
@@ -48,14 +48,14 @@ char	*ft_strdup(const char *s)
 	return (dup);
 }
 
-char	*ft_strndup(const char *s, size_t n)
+char	*ft_strndup(const char *s, size_t n, int *error)
 {
 	char	*ndup;
 	size_t	i;
 
 	if (!s || !n)
-		return (ft_strdup(""));
-	ndup = (char *)ft_calloc(n + 1, sizeof(char));
+		return (ft_strdup("", error));
+	ndup = (char *)ft_calloc(n + 1, sizeof(char), error);
 	if (!ndup)
 		return (NULL);
 	i = 0;
@@ -67,21 +67,21 @@ char	*ft_strndup(const char *s, size_t n)
 	return (ndup);
 }
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(const char *s1, const char *s2, int *error)
 {
 	size_t	i;
 	size_t	j;
 	char	*join;
 
 	if (!s1)
-		return (ft_strdup(s2));
+		return (ft_strdup(s2, error));
 	j = 0;
 	while (s1[j])
 		j++;
 	i = 0;
 	while (s2[i])
 		i++;
-	join = (char *)ft_calloc((i + j + 1), sizeof(char));
+	join = (char *)ft_calloc((i + j + 1), sizeof(char), error);
 	if (!join)
 		return (NULL);
 	i = -1;
@@ -93,14 +93,17 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	return (join);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc(size_t nmemb, size_t size, int *error)
 {
 	void	*array;
 	size_t	i;
 
 	array = (void *)malloc(nmemb * size);
 	if (!array)
+	{
+		*error = 1;
 		return (NULL);
+	}
 	i = 0;
 	while (i < nmemb * size)
 	{

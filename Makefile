@@ -6,7 +6,7 @@
 #    By: ego <ego@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/15 12:42:34 by hcavet            #+#    #+#              #
-#    Updated: 2024/12/19 04:20:07 by ego              ###   ########.fr        #
+#    Updated: 2024/12/20 01:32:24 by ego              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,9 @@ $(NAME)	:	$(OBJS) header
 
 $(BNAME):	bonus
 
-bonus	:	$(BOBJS) header
+bonus	:	$(OBJS) $(BOBJS) header
 			echo "Linking object files..."
+			$(CC) $(CFLAGS) $(OBJS) -I $(IDIR) -o $(NAME) 
 			$(CC) $(CFLAGS) $(BOBJS) -I $(IDIR) -o $(BNAME) 
 			echo "$(GREEN)[OK] checker is ready!$(RESET)"
 
@@ -84,8 +85,10 @@ fclean	:	clean
 VGRIND	=	valgrind
 VFLAGS	=	--leak-check=full
 TEST	=	make --no-print-directory test
+BTEST	=	make --no-print-directory btest
 LOG		=	log
 MIN		=	-1000
+OS		=	linux
 MAX		=	1000
 N		=	5
 
@@ -95,7 +98,7 @@ test	:
 			$(eval ARG = $(shell seq $(MIN) $(MAX) | shuf -n $(N)))
 			if [ "$(N)" -le 10 ]; then echo "Initial stack:\t$(ARG)"; fi
 			echo -n "Checker:\t"
-			$(eval CHECK = $(shell ./push_swap $(ARG) | ./checker_linux $(ARG)))
+			$(eval CHECK = $(shell ./push_swap $(ARG) | ./checker_$(OS) $(ARG)))
 			if [ "$(CHECK)" = "OK" ]; then echo -n "$(GREEN)"; else echo -n "$(RED)"; fi
 			echo "$(CHECK)$(RESET)"
 			echo -n "Moves:\t\t"
@@ -112,6 +115,35 @@ tests	:	all
 			$(TEST) N=5
 			$(TEST)	N=100
 			$(TEST) N=500
+			echo "$(GREEN)[OK] Testing complete!$(RESET)"
+
+btest	:
+			echo "$(ORANGE)Testing for n = $(N)$(RESET)"
+			echo "N = $(N) TEST" >> $(LOG)
+			$(eval ARG = $(shell seq $(MIN) $(MAX) | shuf -n $(N)))
+			if [ "$(N)" -le 10 ]; then echo "Initial stack:\t$(ARG)"; fi
+			echo -n "Checker:\t"
+			$(eval MCHECK = $(shell ./push_swap $(ARG) | ./checker $(ARG) | sed 's/\x1b\[[0-9;]*m//g'))
+			echo "$(MCHECK)"
+			echo -n "Checker:\t"
+			$(eval SCHECK = $(shell ./push_swap $(ARG) | ./checker_$(OS) $(ARG)))
+			echo "$(SCHECK)"
+			echo -n "Diff:\t\t"
+			./push_swap $(ARG) > instructions
+			if [ "$(MCHECK)" = "$(SCHECK)" ]; then echo "$(GREEN)OK$(RESET)"; else echo "$(RED)KO$(RESET)"; fi
+			$(VGRIND) $(VFLAGS) ./$(BNAME) $(ARG) < instructions >> $(LOG) 2>&1
+			$(RM) instructions
+			echo "" >> $(LOG)
+			echo "$(BLUE)Moves and leak check stored in $(LOG) file.$(RESET)"
+			if [ $(N) -le 499 ]; then echo ""; fi
+
+btests	:	bonus
+			echo "Iniating testing..."
+			$(BTEST) N=2
+			$(BTEST) N=3
+			$(BTEST) N=5
+			$(BTEST)	N=100
+			$(BTEST) N=500
 			echo "$(GREEN)[OK] Testing complete!$(RESET)"
 
 leaks	:
@@ -132,7 +164,7 @@ leaks	:
 re		:	fclean all
 
 .PHONY	:	all clean fclean re
-.SILENT	:	all $(NAME) $(OBJS) $(BOBJS) norm debug clean fclean re header test bonus tests leaks
+.SILENT	:	all $(NAME) $(OBJS) $(BOBJS) norm debug clean fclean re header test bonus tests leaks btest btests
 
 RED		=	\033[31m
 ORANGE	=	\033[38;5;214m

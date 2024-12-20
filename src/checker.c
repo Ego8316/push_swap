@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 07:32:19 by ego               #+#    #+#             */
-/*   Updated: 2024/12/19 04:50:22 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/19 23:56:46 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,13 @@ static int	read_instructions(t_stack **stack_a, t_stack **stack_b)
 	char	*line;
 
 	error = 0;
-	line = get_next_line(STDIN_FILENO);
+	line = get_next_line(STDIN_FILENO, &error);
 	while (line)
 	{
 		if (!error)
 			error = do_move(line, stack_a, stack_b);
 		ft_free(&line);
-		line = get_next_line(STDIN_FILENO);
-		if (!line)
-			error = 1;
+		line = get_next_line(STDIN_FILENO, &error);
 	}
 	ft_free(&line);
 	return (error);

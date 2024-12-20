@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:46:57 by ego               #+#    #+#             */
-/*   Updated: 2024/12/19 04:50:02 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/20 00:06:05 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ void	rrb(t_stack **stack_b, int display);
 void	rrr(t_stack **stack_a, t_stack **stack_b, int display);
 
 // get_next_line
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, int *error);
 int		ft_char_in_str(char c, char *s);
-char	*ft_strdup(const char *s);
-char	*ft_strndup(const char *s, size_t n);
-char	*ft_strjoin(const char *s1, const char *s2);
-void	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_strdup(const char *s, int *error);
+char	*ft_strndup(const char *s, size_t n, int *error);
+char	*ft_strjoin(const char *s1, const char *s2, int *error);
+void	*ft_calloc(size_t nmemb, size_t size, int *error);
 
 // Display utilities
 void	ft_putstr(char *str);
