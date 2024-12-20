@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: hcavet <hcavet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 01:30:25 by ego               #+#    #+#             */
-/*   Updated: 2024/12/16 05:28:57 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/20 14:38:13 by hcavet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	get_rank_index(t_stack *stack, int rank)
 
 /*	get_target_index
 *	Gets the index where given rank should go in the current stack.
-*	Return: said index
+*	Return: said index.
 */
 int	get_target_index(t_stack *stack, int rank)
 {

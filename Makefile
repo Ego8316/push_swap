@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ego <ego@student.42.fr>                    +#+  +:+       +#+         #
+#    By: hcavet <hcavet@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/15 12:42:34 by hcavet            #+#    #+#              #
-#    Updated: 2024/12/20 01:32:24 by ego              ###   ########.fr        #
+#    Updated: 2024/12/20 14:27:04 by hcavet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -142,7 +142,7 @@ btests	:	bonus
 			$(BTEST) N=2
 			$(BTEST) N=3
 			$(BTEST) N=5
-			$(BTEST)	N=100
+			$(BTEST) N=100
 			$(BTEST) N=500
 			echo "$(GREEN)[OK] Testing complete!$(RESET)"
 
