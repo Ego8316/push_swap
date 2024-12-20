@@ -6,13 +6,11 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 07:32:19 by ego               #+#    #+#             */
-/*   Updated: 2024/12/19 23:56:46 by ego              ###   ########.fr       */
+/*   Updated: 2024/12/20 01:39:45 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
-#include <stdio.h>
-#include <fcntl.h>
 
 /*	do_move
 *	Applies the move given by the line.
