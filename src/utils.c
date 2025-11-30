@@ -12,9 +12,12 @@
 
 #include "push_swap.h"
 
-/*	exit_error
-*	Exits the program after freeing the stacks.
-*/
+/**
+ * @brief Frees stacks, prints an error, and exits the program.
+ *
+ * @param stack_a Pointer to stack A.
+ * @param stack_b Pointer to stack B.
+ */
 void	exit_error(t_stack **stack_a, t_stack **stack_b)
 {
 	stack_free(stack_a);
@@ -23,10 +26,14 @@ void	exit_error(t_stack **stack_a, t_stack **stack_b)
 	exit(1);
 }
 
-/*	ft_strcmp
-*	Checks if the two given strings are identical.
-*	Return: 1 if the strings differ, 0 otherwise.
-*/
+/**
+ * @brief Compares two strings for equality.
+ *
+ * @param s1 First string.
+ * @param s2 Second string.
+ *
+ * @return 0 if identical, 1 otherwise.
+ */
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
@@ -43,10 +50,13 @@ int	ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-/*	ft_atoi
-*	Convers a string to an integer.
-*	Return: the converted integer.
-*/
+/**
+ * @brief Converts an ASCII string to an integer.
+ *
+ * @param nptr String to convert.
+ *
+ * @return Converted integer (INT_MIN when input equals "-2147483648").
+ */
 int	ft_atoi(char *nptr)
 {
 	int	nb;
@@ -71,11 +81,13 @@ int	ft_atoi(char *nptr)
 	return (nb * sign);
 }
 
-/*	ft_abs
-*	Computes the absolut value of given integer.
-*	If the given integer is INT_MIN, returns INT_MAX.
-*	Return: absolute value.
-*/
+/**
+ * @brief Computes the absolute value of an integer.
+ *
+ * @param n Number to process.
+ *
+ * @return Absolute value (INT_MAX when input is INT_MIN).
+ */
 int	ft_abs(int n)
 {
 	if (n == INT_MIN)
@@ -85,10 +97,14 @@ int	ft_abs(int n)
 	return (n);
 }
 
-/*	ft_max
-*	Gets the minimum value between two integers.
-*	Return: the minimum value.
-*/
+/**
+ * @brief Returns the maximum of two integers.
+ *
+ * @param x First number.
+ * @param y Second number.
+ *
+ * @return The larger of `x` and `y`.
+ */
 int	ft_max(int x, int y)
 {
 	if (x > y)

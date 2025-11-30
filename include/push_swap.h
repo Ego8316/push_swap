@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:58:57 by ego               #+#    #+#             */
-/*   Updated: 2024/12/19 04:48:57 by ego              ###   ########.fr       */
+/*   Updated: 2025/11/30 20:10:48 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	sort(t_stack **stack_a, t_stack **stack_b, int chunk);
 // Sorting utilities
 void	compute_ranks(t_stack **stack);
 int		get_min_index(t_stack *stack);
-int		get_chunk_rank(t_stack *stack, t_bounds bounds);
 int		get_rank_index(t_stack *stack, int rank);
 int		get_target_index(t_stack *stack, int rank);
 void	shift_stack(t_stack **stack, int rank, char s);

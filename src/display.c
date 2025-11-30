@@ -12,6 +12,11 @@
 
 #include "push_swap.h"
 
+/**
+ * @brief Writes a string to STDOUT.
+ *
+ * @param str Null-terminated string to print.
+ */
 void	ft_putstr(char *str)
 {
 	int	len;
@@ -23,6 +28,11 @@ void	ft_putstr(char *str)
 	return ;
 }
 
+/**
+ * @brief Writes a string to STDERR.
+ *
+ * @param str Null-terminated string to print.
+ */
 void	ft_putstr_error(char *str)
 {
 	int	len;

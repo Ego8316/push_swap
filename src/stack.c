@@ -12,10 +12,13 @@
 
 #include "push_swap.h"
 
-/*	stack_new
-*	Creates a new stack node.
-*	Return: NULL if allocation failed, the new node otherwise.
-*/
+/**
+ * @brief Allocates a new stack node with the given value.
+ *
+ * @param value Value to store.
+ *
+ * @return New node on success, NULL on allocation failure.
+ */
 t_stack	*stack_new(int value)
 {
 	t_stack	*node;
@@ -28,9 +31,11 @@ t_stack	*stack_new(int value)
 	return (node);
 }
 
-/*	stack_free
-*	Frees the whole stack.
-*/
+/**
+ * @brief Frees an entire stack and nulls its pointer.
+ *
+ * @param stack Pointer to the stack head.
+ */
 void	stack_free(t_stack **stack)
 {
 	t_stack	*s;
@@ -51,10 +56,13 @@ void	stack_free(t_stack **stack)
 	return ;
 }
 
-/*	stack_fill
-*	Creates a stack and fills it with the arguments.
-*	Return: the filled stack, exits the program if allocation failed.
-*/
+/**
+ * @brief Builds a stack from argv values (starting at argv[1]).
+ *
+ * @param argv Argument vector containing integer strings.
+ *
+ * @return Pointer to the built stack. Exits on allocation failure.
+ */
 t_stack	*stack_fill(char **argv)
 {
 	t_stack	*stack;
@@ -78,10 +86,13 @@ t_stack	*stack_fill(char **argv)
 	return (stack);
 }
 
-/*	stack_issorted
-*	Checks if a stack is sorted.
-*	Return: 1 if it is sorted, 0 otherwise.
-*/
+/**
+ * @brief Checks if a stack is sorted in ascending order.
+ *
+ * @param stack Stack to inspect.
+ *
+ * @return 1 when sorted or empty, 0 otherwise.
+ */
 int	stack_issorted(t_stack *stack)
 {
 	if (!stack)
@@ -95,10 +106,13 @@ int	stack_issorted(t_stack *stack)
 	return (1);
 }
 
-/*	stack_size
-*	Computes the size of a stack.
-*	Return: said size.
-*/
+/**
+ * @brief Computes the number of nodes in a stack.
+ *
+ * @param stack Stack to measure.
+ *
+ * @return Stack length.
+ */
 int	stack_size(t_stack *stack)
 {
 	int	size;

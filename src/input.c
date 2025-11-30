@@ -12,19 +12,25 @@
 
 #include "push_swap.h"
 
-/*	ft_isdigit
-*	Checks if the given character is a digit.
-*	Return: 1 if the character is a digit, 0 otherwise.
-*/
+/**
+ * @brief Checks if the given character is a digit.
+ *
+ * @param c Character to test.
+ *
+ * @return 1 if digit, 0 otherwise.
+ */
 static int	ft_isdigit(char c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-/*	ft_isint
-*	Checks if the given string corresponds to an integer.
-*	Return: 1 if the string is an int, 2 if it is a zero, 0 otherwise.
-*/
+/**
+ * @brief Validates whether the string represents a 32-bit integer.
+ *
+ * @param s String to validate.
+ *
+ * @return 1 if valid, 2 if it represents zero, 0 otherwise.
+ */
 static int	ft_isint(char *s)
 {
 	int			i;
@@ -52,10 +58,13 @@ static int	ft_isint(char *s)
 	return (1);
 }
 
-/*	have_duplicates
-*	Checks if there are duplicates inside the input.
-*	Return: 1 if there are duplicates, 0 otherwise.
-*/
+/**
+ * @brief Checks if the argument list contains duplicates.
+ *
+ * @param argv Argument vector starting at argv[0].
+ *
+ * @return 1 when duplicates are found, 0 otherwise.
+ */
 static int	have_duplicates(char **argv)
 {
 	int	i;
@@ -80,10 +89,19 @@ static int	have_duplicates(char **argv)
 	return (0);
 }
 
-/*	check_argument
-*	Checks if the given argument is correct.
-*	Return: 1 if the argument is correct, 0 otherwise.
-*/
+/**
+ * @brief Validates the command-line arguments.
+ *
+ * Rules:
+ * - Every token must be an integer in range.
+ * - At most one zero across all inputs.
+ * - No duplicate values (ignoring leading '+').
+ *
+ * @param argc Argument count.
+ * @param argv Argument vector.
+ *
+ * @return 1 if valid, 0 otherwise.
+ */
 int	check_argument(int argc, char **argv)
 {
 	int	i;

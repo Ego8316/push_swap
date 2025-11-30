@@ -53,12 +53,11 @@ void	rrb(t_stack **stack_b, int display);
 void	rrr(t_stack **stack_a, t_stack **stack_b, int display);
 
 // get_next_line
-char	*get_next_line(int fd, int *error);
-int		ft_char_in_str(char c, char *s);
-char	*ft_strdup(const char *s, int *error);
-char	*ft_strndup(const char *s, size_t n, int *error);
-char	*ft_strjoin(const char *s1, const char *s2, int *error);
-void	*ft_calloc(size_t nmemb, size_t size, int *error);
+char	*get_next_line(int fd);
+int		ft_char_in_str(char c, const char *s);
+size_t	ft_strlen_null(const char *str);
+void	*ft_memset(void *b, int c, size_t len);
+void	*ft_memmove(void *dst, const void *src, size_t len);
 
 // Display utilities
 void	ft_putstr(char *str);
@@ -68,7 +67,6 @@ void	ft_putstr_error(char *str);
 int		check_argument(int argc, char **argv);
 
 // Utilities
-int		ft_free(char **s);
 void	exit_error(t_stack **stack_a, t_stack **stack_b);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_atoi(char *nptr);

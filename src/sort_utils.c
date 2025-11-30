@@ -12,9 +12,11 @@
 
 #include "push_swap.h"
 
-/*	compute_ranks
-*	Compute the sorted ranks for each value of the stack and assign them.
-*/
+/**
+ * @brief Assigns a rank to each node based on sorted order.
+ *
+ * @param stack Pointer to the stack head.
+ */
 void	compute_ranks(t_stack **stack)
 {
 	t_stack	*head;
@@ -39,10 +41,13 @@ void	compute_ranks(t_stack **stack)
 	return ;
 }
 
-/*	get_min_index
-*	Get the index of the minimum value of the stack.
-*	Return: said index.
-*/
+/**
+ * @brief Finds the index of the minimum value in the stack.
+ *
+ * @param stack Stack to inspect.
+ *
+ * @return Index of the smallest value.
+ */
 int	get_min_index(t_stack *stack)
 {
 	int	min;
@@ -65,10 +70,14 @@ int	get_min_index(t_stack *stack)
 	return (min_index);
 }
 
-/*	get_rank_index
-*	Gets the stack index corresponding to the asked rank.
-*	Return: the desired index, -1 if not found.
-*/
+/**
+ * @brief Finds the index of the node with a given rank.
+ *
+ * @param stack Stack to inspect.
+ * @param rank Target rank.
+ *
+ * @return Index of the rank, -1 if not found.
+ */
 int	get_rank_index(t_stack *stack, int rank)
 {
 	int	index;
@@ -84,10 +93,14 @@ int	get_rank_index(t_stack *stack, int rank)
 	return (-1);
 }
 
-/*	get_target_index
-*	Gets the index where given rank should go in the current stack.
-*	Return: said index.
-*/
+/**
+ * @brief Gets the index where a rank should be inserted in sorted order.
+ *
+ * @param stack Stack to inspect.
+ * @param rank Rank to place.
+ *
+ * @return Target index for insertion.
+ */
 int	get_target_index(t_stack *stack, int rank)
 {
 	int	min_rank_index;
@@ -115,10 +128,15 @@ int	get_target_index(t_stack *stack, int rank)
 		return (target_index);
 }
 
-/*	shift_stack
-*	Shifts the stack s to get desired rank to the top of the stack.
-*	Finds the minimum moves between rotate and reverse rotate.
-*/
+/**
+ * @brief Rotates a stack to bring the node with `rank` to the top.
+ *
+ * Chooses the direction with the fewest moves.
+ *
+ * @param stack Pointer to the stack.
+ * @param rank Desired rank to bring up.
+ * @param s Stack identifier ('a' or 'b') to pick the right rotation.
+ */
 void	shift_stack(t_stack **stack, int rank, char s)
 {
 	int	index;

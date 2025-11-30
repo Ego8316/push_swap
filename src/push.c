@@ -12,9 +12,12 @@
 
 #include "push_swap.h"
 
-/*	push
-*	Pushes the first element of src to dest.
-*/
+/**
+ * @brief Moves the first element of `src` to the top of `dest`.
+ *
+ * @param src Pointer to the source stack.
+ * @param dest Pointer to the destination stack.
+ */
 static void	push(t_stack **src, t_stack **dest)
 {
 	t_stack	*temp;
@@ -28,9 +31,13 @@ static void	push(t_stack **src, t_stack **dest)
 	return ;
 }
 
-/*	pa
-*	Pushes the first element of stack b to stack a.
-*/
+/**
+ * @brief Pushes the first element of stack B to stack A.
+ *
+ * @param stack_a Pointer to stack A.
+ * @param stack_b Pointer to stack B.
+ * @param display Set to 1 to print the operation.
+ */
 void	pa(t_stack **stack_a, t_stack **stack_b, int display)
 {
 	push(stack_b, stack_a);
@@ -39,9 +46,13 @@ void	pa(t_stack **stack_a, t_stack **stack_b, int display)
 	return ;
 }
 
-/*	pb
-*	Pushes the first element of stack a to stack b.
-*/
+/**
+ * @brief Pushes the first element of stack A to stack B.
+ *
+ * @param stack_a Pointer to stack A.
+ * @param stack_b Pointer to stack B.
+ * @param display Set to 1 to print the operation.
+ */
 void	pb(t_stack **stack_a, t_stack **stack_b, int display)
 {
 	push(stack_a, stack_b);

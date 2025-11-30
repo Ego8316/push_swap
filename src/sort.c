@@ -12,10 +12,13 @@
 
 #include "push_swap.h"
 
-/*	push_all
-*	Pushes everything from stack a to stack b except three. 
-*	The push is made by smaller chunks rankwise.
-*/
+/**
+ * @brief Pushes all elements from A to B except three, chunk by rank.
+ *
+ * @param a Pointer to stack A.
+ * @param b Pointer to stack B.
+ * @param chunk Chunk divisor controlling batch size.
+ */
 static void	push_all(t_stack **a, t_stack **b, int chunk)
 {
 	int			remaining;
@@ -43,12 +46,14 @@ static void	push_all(t_stack **a, t_stack **b, int chunk)
 	return ;
 }
 
-/*	push_back
-*	Pushes back everything from stack b to stack a.
-*	Computes the cost of moving for each item of stack b.
-*	Moves the least-cost item with minimum rotations.
-*	Pushes said item and repeat operation until stack b is empty.
-*/
+/**
+ * @brief Pushes everything back from B to A using minimal rotations.
+ *
+ * Costs are recomputed before each move to pick the cheapest candidate.
+ *
+ * @param a Pointer to stack A.
+ * @param b Pointer to stack B.
+ */
 static void	push_back(t_stack **a, t_stack **b)
 {
 	while (*b)
@@ -60,12 +65,13 @@ static void	push_back(t_stack **a, t_stack **b)
 	return ;
 }
 
-/*	sort
-*	Sorts the stack a.
-*	First pushes everything to b my smaller and smaller chunks.
-*	Sorts the three elements left in a with small_sort.
-*	Pushes back everything to a in right order with minimal moves.
-*/
+/**
+ * @brief Sorts stack A using a chunk-based push-swap strategy.
+ *
+ * @param stack_a Pointer to stack A.
+ * @param stack_b Pointer to stack B.
+ * @param chunk Chunk divisor controlling batch size.
+ */
 void	sort(t_stack **stack_a, t_stack **stack_b, int chunk)
 {
 	compute_ranks(stack_a);

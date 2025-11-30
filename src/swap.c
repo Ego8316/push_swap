@@ -12,9 +12,11 @@
 
 #include "push_swap.h"
 
-/*	swap
-*	Swaps the first two elements of stack.
-*/
+/**
+ * @brief Swaps the first two elements of a stack.
+ *
+ * @param stack Stack to mutate.
+ */
 static void	swap(t_stack *stack)
 {
 	int	temp;
@@ -30,9 +32,12 @@ static void	swap(t_stack *stack)
 	return ;
 }
 
-/*	sa
-*	Swaps the first two elements of stack a.
-*/
+/**
+ * @brief Swaps the first two elements of stack A.
+ *
+ * @param stack_a Pointer to stack A.
+ * @param display Set to 1 to print the operation.
+ */
 void	sa(t_stack **stack_a, int display)
 {
 	swap(*stack_a);
@@ -41,9 +46,12 @@ void	sa(t_stack **stack_a, int display)
 	return ;
 }
 
-/*	sa
-*	Swaps the first two elements of stack b.
-*/
+/**
+ * @brief Swaps the first two elements of stack B.
+ *
+ * @param stack_b Pointer to stack B.
+ * @param display Set to 1 to print the operation.
+ */
 void	sb(t_stack **stack_b, int display)
 {
 	swap(*stack_b);
@@ -52,9 +60,13 @@ void	sb(t_stack **stack_b, int display)
 	return ;
 }
 
-/*	ss
-*	sa and sb at the same time.
-*/
+/**
+ * @brief Executes `sa` and `sb` simultaneously.
+ *
+ * @param stack_a Pointer to stack A.
+ * @param stack_b Pointer to stack B.
+ * @param display Set to 1 to print the operation.
+ */
 void	ss(t_stack **stack_a, t_stack **stack_b, int display)
 {
 	swap(*stack_a);

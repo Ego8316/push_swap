@@ -12,10 +12,15 @@
 
 #include "checker.h"
 
-/*	do_move
-*	Applies the move given by the line.
-*	Return: 0 if the line does correspond to a move, 1 otherwise.
-*/
+/**
+ * @brief Applies a single instruction read from input.
+ *
+ * @param line Instruction string (with trailing newline).
+ * @param a Pointer to stack A.
+ * @param b Pointer to stack B.
+ *
+ * @return 0 on success, 1 on unknown instruction.
+ */
 static int	do_move(char *line, t_stack **a, t_stack **b)
 {
 	if (!ft_strcmp("sa\n", line))
@@ -45,30 +50,44 @@ static int	do_move(char *line, t_stack **a, t_stack **b)
 	return (0);
 }
 
-/*	read_instructions
-*	Reads line by line the standard input.
-*	In case of error, sets error to one to indicate
-*	an error occured (failed malloc or wrong instruction).
-*	Return: 0 if everything went well, 1 otherwise.
-*/
+/**
+ * @brief Reads and executes instructions from STDIN.
+ *
+ * @param stack_a Pointer to stack A.
+ * @param stack_b Pointer to stack B.
+ *
+ * @return 0 on success, 1 on invalid instruction.
+ */
 static int	read_instructions(t_stack **stack_a, t_stack **stack_b)
 {
-	int		error;
 	char	*line;
 
-	error = 0;
-	line = get_next_line(STDIN_FILENO, &error);
+	line = get_next_line(STDIN_FILENO);
 	while (line)
 	{
-		if (!error)
-			error = do_move(line, stack_a, stack_b);
-		ft_free(&line);
-		line = get_next_line(STDIN_FILENO, &error);
+		if (do_move(line, stack_a, stack_b))
+		{
+			free(line);
+			return (1);
+		}
+		free(line);
+		line = get_next_line(STDIN_FILENO);
 	}
-	ft_free(&line);
-	return (error);
+	free(line);
+	return (0);
 }
 
+/**
+ * @brief Entry point for the checker program.
+ *
+ * Validates arguments, executes provided operations, and reports whether
+ * the final stack is sorted.
+ *
+ * @param argc Argument count.
+ * @param argv Argument vector.
+ *
+ * @return 0 on success, exits with error on invalid input or instruction.
+ */
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;

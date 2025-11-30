@@ -12,9 +12,13 @@
 
 #include "push_swap.h"
 
-/*	init_boundaries
-*	Initializes the boundaries for the first chunk.
-*/
+/**
+ * @brief Initializes chunk boundaries for the first pass.
+ *
+ * @param bounds Boundaries struct to fill.
+ * @param size Total stack size.
+ * @param chunk Chunk divisor.
+ */
 void	init_boundaries(t_bounds *bounds, int size, int chunk)
 {
 	bounds->lower = 0;
@@ -23,9 +27,12 @@ void	init_boundaries(t_bounds *bounds, int size, int chunk)
 	return ;
 }
 
-/*	update_boundaries
-*	Updates boundaries to those of the next chunk.
-*/
+/**
+ * @brief Advances chunk boundaries to the next range.
+ *
+ * @param bounds Boundaries struct to update.
+ * @param chunk Chunk divisor.
+ */
 void	update_boundaries(t_bounds *bounds, int chunk)
 {
 	bounds->lower = bounds->upper;

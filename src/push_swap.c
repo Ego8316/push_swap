@@ -12,6 +12,17 @@
 
 #include "push_swap.h"
 
+/**
+ * @brief Entry point for the push_swap program.
+ *
+ * Parses arguments, builds stacks, chooses the appropriate sorting strategy,
+ * and outputs the list of operations.
+ *
+ * @param argc Argument count.
+ * @param argv Argument vector.
+ *
+ * @return 0 on success.
+ */
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;

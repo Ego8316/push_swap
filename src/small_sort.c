@@ -12,9 +12,11 @@
 
 #include "push_swap.h"
 
-/*	sort_three
-*	Sorts the stack_a if it has size 3.
-*/
+/**
+ * @brief Sorts stack A when it contains exactly three elements.
+ *
+ * @param stack_a Pointer to stack A.
+ */
 static void	sort_three(t_stack **stack_a)
 {
 	int	first;
@@ -43,9 +45,14 @@ static void	sort_three(t_stack **stack_a)
 	return ;
 }
 
-/*	sort_four
-Sorts the stack if it has size 4.
-*/
+/**
+ * @brief Sorts stack A when it contains four elements.
+ *
+ * Moves the smallest value to B, sorts the remaining three, then restores it.
+ *
+ * @param stack_a Pointer to stack A.
+ * @param stack_b Pointer to stack B.
+ */
 static void	sort_four(t_stack **stack_a, t_stack **stack_b)
 {
 	int	min_index;
@@ -66,9 +73,14 @@ static void	sort_four(t_stack **stack_a, t_stack **stack_b)
 	return ;
 }
 
-/*	sort_five
-Sorts the stack if it has size 5.
-*/
+/**
+ * @brief Sorts stack A when it contains five elements.
+ *
+ * Pushes the smallest value to B, sorts the remaining four, then restores it.
+ *
+ * @param stack_a Pointer to stack A.
+ * @param stack_b Pointer to stack B.
+ */
 static void	sort_five(t_stack **stack_a, t_stack **stack_b)
 {
 	int	min_index;
@@ -94,9 +106,13 @@ static void	sort_five(t_stack **stack_a, t_stack **stack_b)
 	return ;
 }
 
-/*	small_sort
-*	Sorts the stack if it has size <= 5.
-*/
+/**
+ * @brief Sorts small stacks (size 3 to 5) with dedicated routines.
+ *
+ * @param stack_a Pointer to stack A.
+ * @param stack_b Pointer to stack B.
+ * @param size Size of stack A.
+ */
 void	small_sort(t_stack **stack_a, t_stack **stack_b, int size)
 {
 	if (size == 3)

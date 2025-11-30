@@ -12,11 +12,12 @@
 
 #include "push_swap.h"
 
-/*	calculate_costs
-*	Computes the move cost for each item of stack b.
-*	If position is in the first half of the stack,
-*	cost is positive and negative otherwise.
-*/
+/**
+ * @brief Computes move costs for each element of stack B.
+ *
+ * @param a Stack A (target).
+ * @param b Stack B (source).
+ */
 void	calculate_costs(t_stack *a, t_stack *b)
 {
 	int	size_a;
@@ -40,6 +41,13 @@ void	calculate_costs(t_stack *a, t_stack *b)
 	return ;
 }
 
+/**
+ * @brief Finds the maximum rank value in stack B.
+ *
+ * @param b Stack B.
+ *
+ * @return Highest rank.
+ */
 static int	max_rank(t_stack *b)
 {
 	int	max_rank;
@@ -54,12 +62,19 @@ static int	max_rank(t_stack *b)
 	return (max_rank);
 }
 
-/*	get_effective_cost
-*	Computes the effective cost for moving an item from b to a.
-*	Example: cost_a = -3 and cost_b = -5, the cost is actually 5 and
-*	not 8 since three of the rotations can be performed on both stacks.
-*	Return: effective cost.
-*/
+/**
+ * @brief Computes the effective cost of moving an item from B to A.
+ *
+ * When costs share the same sign, overlapping rotations reduce the total
+ * operations needed.
+ *
+ * @param b Stack B.
+ * @param rank Rank of the current node.
+ * @param cost_a Rotational cost on stack A.
+ * @param cost_b Rotational cost on stack B.
+ *
+ * @return Weighted effective cost.
+ */
 static int	get_effective_cost(t_stack *b, int rank, int cost_a, int cost_b)
 {
 	int	move_penalty;
@@ -73,9 +88,14 @@ static int	get_effective_cost(t_stack *b, int rank, int cost_a, int cost_b)
 	return (MOVE_WEIGHT * move_penalty + RANK_WEIGHT * rank_penalty);
 }
 
-/*	double_shift
-*	Shifts both stacks using double rotations when possible.
-*/
+/**
+ * @brief Applies combined rotations to reduce move cost.
+ *
+ * @param a Pointer to stack A.
+ * @param b Pointer to stack B.
+ * @param cost_a Pending rotations for A.
+ * @param cost_b Pending rotations for B.
+ */
 static void	double_shift(t_stack **a, t_stack **b, int cost_a, int cost_b)
 {
 	while (cost_a < 0 && cost_b < 0)
@@ -100,9 +120,12 @@ static void	double_shift(t_stack **a, t_stack **b, int cost_a, int cost_b)
 		rb(b, 1);
 }
 
-/*	move_least_cost_item
-*	Finds the least-cost item to bring to the top of stack b.
-*/
+/**
+ * @brief Rotates stacks to bring the least-cost item from B to the top.
+ *
+ * @param a Pointer to stack A.
+ * @param b Pointer to stack B.
+ */
 void	move_least_cost_item(t_stack **a, t_stack **b)
 {
 	t_stack		*s;

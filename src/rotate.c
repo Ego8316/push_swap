@@ -12,9 +12,11 @@
 
 #include "push_swap.h"
 
-/*	rotate
-*	The first element of the stack becomes the last one.
-*/
+/**
+ * @brief Moves the first element of the stack to the bottom.
+ *
+ * @param stack Stack to rotate.
+ */
 static void	rotate(t_stack **stack)
 {
 	t_stack	*temp;
@@ -31,9 +33,12 @@ static void	rotate(t_stack **stack)
 	tail->next = temp;
 }
 
-/*	ra
-*	The first element of stack a becomes the last one.
-*/
+/**
+ * @brief Rotates stack A up by one.
+ *
+ * @param stack_a Pointer to stack A.
+ * @param display Set to 1 to print the operation.
+ */
 void	ra(t_stack **stack_a, int display)
 {
 	rotate(stack_a);
@@ -42,9 +47,12 @@ void	ra(t_stack **stack_a, int display)
 	return ;
 }
 
-/*	rb
-*	The first element of stack b becomes the last one.
-*/
+/**
+ * @brief Rotates stack B up by one.
+ *
+ * @param stack_b Pointer to stack B.
+ * @param display Set to 1 to print the operation.
+ */
 void	rb(t_stack **stack_b, int display)
 {
 	rotate(stack_b);
@@ -53,9 +61,13 @@ void	rb(t_stack **stack_b, int display)
 	return ;
 }
 
-/*	rr
-*	ra and rb at the same time.
-*/
+/**
+ * @brief Executes `ra` and `rb` simultaneously.
+ *
+ * @param stack_a Pointer to stack A.
+ * @param stack_b Pointer to stack B.
+ * @param display Set to 1 to print the operation.
+ */
 void	rr(t_stack **stack_a, t_stack **stack_b, int display)
 {
 	rotate(stack_a);
