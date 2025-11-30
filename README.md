@@ -39,7 +39,7 @@ The bonus adds a `checker` program that reads operations from stdin, applies the
 - **Finishing move**: Rotate A to bring the smallest rank to the top.
 
 Typical performance (random data):
-- ~540 moves for `n = 100`
+- ~530 moves for `n = 100`
 - ~4200 moves for `n = 500`
 
 ---
