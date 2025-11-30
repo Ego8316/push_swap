@@ -44,7 +44,7 @@ Typical performance (random data):
 
 ---
 
-## 🚀 Build
+## 🛠️ Building
 ```bash
 make            # build push_swap
 make bonus      # build push_swap and checker
@@ -54,7 +54,7 @@ make fclean     # remove objects and binaries
 
 ---
 
-## 🧰 Usage
+## 🚀 Usage
 ```bash
 ./push_swap 2 1 3 6 5 8
 ./push_swap 3 2 1 | ./checker_linux 3 2 1   # using the 42 checker
