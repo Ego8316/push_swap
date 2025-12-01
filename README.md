@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ayogun/42-project-badges/main/badges/push_swapm.png" height="150" alt="42 push_swap Badge"/>
+  <img src="https://github.com/Ego8316/Ego8316/blob/main/42-badges/push_swap.png" height="150" alt="42 push_swap Badge"/>
 </p>
 
 <p align="center">
